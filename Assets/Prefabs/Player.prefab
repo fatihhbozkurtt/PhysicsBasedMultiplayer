@@ -10,9 +10,12 @@ GameObject:
   m_Component:
   - component: {fileID: 8341664001301358297}
   - component: {fileID: 5374351561876152455}
-  - component: {fileID: 3477916341942480707}
   - component: {fileID: 2175405360521128319}
   - component: {fileID: 6651919330136873565}
+  - component: {fileID: 3645843963560491653}
+  - component: {fileID: 3477916341942480707}
+  - component: {fileID: 1303759496851201591}
+  - component: {fileID: 9164050734464291579}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -61,26 +64,6 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &3477916341942480707
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3007939950473973888}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c27eba73f454c04387246bcc7b40a12, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _componentIndexCache: 255
-  _addedNetworkObject: {fileID: 2175405360521128319}
-  _networkObjectCache: {fileID: 0}
-  walkSpeed: 5
-  runSpeed: 10
-  jumpHeight: 2
-  gravity: -9.81
-  playerCamera: {fileID: 0}
 --- !u!114 &2175405360521128319
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -174,6 +157,78 @@ MonoBehaviour:
     X: 0
     Y: 0
     Z: 0
+--- !u!114 &3645843963560491653
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3007939950473973888}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c71fd7f855ec523429999fc4e14a1928, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _overrideType: 3
+  _updateHostVisibility: 1
+  _observerConditions: []
+--- !u!114 &3477916341942480707
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3007939950473973888}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c27eba73f454c04387246bcc7b40a12, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _componentIndexCache: 255
+  _addedNetworkObject: {fileID: 2175405360521128319}
+  _networkObjectCache: {fileID: 0}
+  walkSpeed: 5
+  runSpeed: 10
+  jumpHeight: 2
+  gravity: -9.81
+  cameraTransform: {fileID: 0}
+  mouseSensitivity: 100
+  playerCamera: {fileID: 0}
+--- !u!114 &1303759496851201591
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3007939950473973888}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ca5fac8d00d5c94080c78d708de7315, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _componentIndexCache: 255
+  _addedNetworkObject: {fileID: 2175405360521128319}
+  _networkObjectCache: {fileID: 0}
+  meshRenderer: {fileID: 5524068255838278960}
+  endColor: {r: 0.13679248, g: 0.45471776, b: 1, a: 0}
+--- !u!114 &9164050734464291579
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3007939950473973888}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ae2edd09b899964e979e76b9fe26948, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _componentIndexCache: 255
+  _addedNetworkObject: {fileID: 2175405360521128319}
+  _networkObjectCache: {fileID: 0}
+  BallPrefab: {fileID: 8592547100457438638, guid: d4f05d5616af4a14294625a8dff77ca0, type: 3}
+  spawnOffset: {x: 0, y: 0.5, z: 2}
+  spawnedBalls: []
 --- !u!1 &3588231147926502944
 GameObject:
   m_ObjectHideFlags: 0
