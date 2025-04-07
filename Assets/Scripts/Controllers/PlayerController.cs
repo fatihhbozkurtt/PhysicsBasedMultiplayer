@@ -30,7 +30,7 @@ namespace Controllers
                 // Thus it prevents us to isntantiate cameras
                 playerCamera = Camera.main;
                 playerCamera.transform.position = new Vector3(transform.position.x, transform.position.y + 0.4f,
-                    transform.position.z + .25f);
+                    transform.position.z + .3f);
                 playerCamera.transform.SetParent(transform);
             }
             else

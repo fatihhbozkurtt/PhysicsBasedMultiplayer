@@ -24,17 +24,20 @@ namespace Controllers
 
         private void Update()
         {
+            /*
             if (Input.GetKeyDown(KeyCode.Mouse1))
                 SpawnBallServer(BallPrefab, transform.position + (transform.forward * 2), this);
             else if (Input.GetKeyDown(KeyCode.Mouse2))
             {
                 if (spawnedBalls.Count <= 0) return;
-                
+
                 GameObject lastBall = spawnedBalls[^1];
                 spawnedBalls.Remove(lastBall);
                 DespawnBallServer(lastBall);
             }
+        */
         }
+
 
         private void AddSpawnedBall(GameObject newBall)
         {
