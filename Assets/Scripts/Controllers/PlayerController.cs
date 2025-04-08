@@ -51,6 +51,8 @@ namespace Controllers
 
         void Update()
         {
+            if (!IsOwner) return;
+
             // Zemin kontrolü
             isGrounded = controller.isGrounded;
             if (isGrounded && velocity.y < 0)
@@ -76,17 +78,15 @@ namespace Controllers
             velocity.y += gravity * Time.deltaTime;
             controller.Move(velocity * Time.deltaTime);
 
-            // Q / E tuşları ile karakterin yönünü çevirme
-            float rotationSpeed = 100f; // Derece/saniye
-            if (Input.GetKey(KeyCode.Q))
-            {
-                transform.Rotate(Vector3.up, -rotationSpeed * Time.deltaTime);
-            }
+            // Mouse ile bakış yönü
+            float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
+            float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;
 
-            if (Input.GetKey(KeyCode.E))
-            {
-                transform.Rotate(Vector3.up, rotationSpeed * Time.deltaTime);
-            }
+            xRotation -= mouseY;
+            xRotation = Mathf.Clamp(xRotation, -90f, 90f); // Yukarı-aşağı sınır
+
+            cameraTransform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
+            transform.Rotate(Vector3.up * mouseX); // Karakteri sağa-sola döndür
         }
     }
 }

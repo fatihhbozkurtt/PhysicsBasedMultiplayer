@@ -1,8 +1,7 @@
-﻿using Data;
-using FishNet.Object;
+﻿using FishNet.Object;
 using UnityEngine;
 
-namespace Controllers
+namespace Controllers.Shoot
 {
     public class Projectile : NetworkBehaviour
     {

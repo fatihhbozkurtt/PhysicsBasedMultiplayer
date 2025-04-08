@@ -5,8 +5,9 @@ using UnityEngine;
 namespace Controllers
 {
     public class SpawnNetworkController : NetworkBehaviour
-    {
-        [Header("References")] public GameObject BallPrefab;
+    { 
+        
+        [Header("References")] public GameObject ObjectToSpawnPrefab;
 
         [Header("Debug")] public List<GameObject> spawnedBalls;
 
@@ -24,10 +25,9 @@ namespace Controllers
 
         private void Update()
         {
-            /*
-            if (Input.GetKeyDown(KeyCode.Mouse1))
-                SpawnBallServer(BallPrefab, transform.position + (transform.forward * 2), this);
-            else if (Input.GetKeyDown(KeyCode.Mouse2))
+            if (Input.GetKeyDown(KeyCode.Alpha1))
+                SpawnBallServer(ObjectToSpawnPrefab, transform.position + (transform.forward * 2), this);
+            else if (Input.GetKeyDown(KeyCode.Alpha2))
             {
                 if (spawnedBalls.Count <= 0) return;
 
@@ -35,7 +35,6 @@ namespace Controllers
                 spawnedBalls.Remove(lastBall);
                 DespawnBallServer(lastBall);
             }
-        */
         }
 
 
@@ -52,25 +51,41 @@ namespace Controllers
         {
             GameObject clone = Instantiate(prefab, spawnPoint, Quaternion.identity);
             ServerManager.Spawn(clone);
-            SetSpawnedBallsList(clone, invoker);
+
+            // Sunucuda renk belirlenir
+            Color randomColor = GetRandomColor();
+
+            // Renk ve referanslar istemcilere gönderilir
+            SetSpawnedBallClient(clone, invoker, randomColor);
         }
 
         [ObserversRpc]
-        private void SetSpawnedBallsList(GameObject spawnedObj, SpawnNetworkController invoker)
+        private void SetSpawnedBallClient(GameObject spawnedObj, SpawnNetworkController invoker, Color color)
         {
+            // İstemcide listeye ekleme
             invoker.AddSpawnedBall(spawnedObj);
+
+            // Materyal rengi atama
+            MeshRenderer renderer = spawnedObj.GetComponent<MeshRenderer>();
+            if (renderer != null)
+                renderer.material.color = color;
         }
 
+        // Bu örnekte diziyle değil direkt random renk döndürüyoruz (gerekirse dizi versiyonunu da ekleyebilirim)
+        private Color GetRandomColor()
+        {
+            return Random.ColorHSV(); // veya sabit Color array'den seçebilirsin
+        }
         #endregion
 
         #region Despawn
 
         [ServerRpc(RequireOwnership = false)]
-        public void DespawnBallServer(GameObject spawnedBall)
+        private void DespawnBallServer(GameObject spawnedBall)
         {
             ServerManager.Despawn(spawnedBall);
+           
         }
-
         #endregion
     }
 }
