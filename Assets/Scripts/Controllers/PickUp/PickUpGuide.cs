@@ -1,4 +1,3 @@
-using System;
 using FishNet.Object;
 using UnityEngine;
 
@@ -82,15 +81,6 @@ namespace Controllers.PickUp
         #endregion
 
         #region Drop
-
-        private void OnDespawn(GameObject obj)
-        {
-            if (_objInHand != null && _objInHand == obj)
-            {
-                _hasObjectInHand = false;
-                _objInHand = null;
-            }
-        }
 
         // ReSharper disable Unity.PerformanceAnalysis
         private void Drop()

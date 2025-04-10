@@ -419,6 +419,8 @@ MonoBehaviour:
   _networkObjectCache: {fileID: 0}
   pickUpTransform: {fileID: 8389954160831677422}
   rayDistance: 2
+  _hasObjectInHand: 0
+  _objInHand: {fileID: 0}
 --- !u!1 &3588231147926502944
 GameObject:
   m_ObjectHideFlags: 0
@@ -522,7 +524,7 @@ CapsuleCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -677,7 +679,6 @@ GameObject:
   - component: {fileID: 3973582990987980667}
   - component: {fileID: 8506328601120076594}
   - component: {fileID: 5421966058808818636}
-  - component: {fileID: 5043626013703929037}
   m_Layer: 0
   m_Name: Forward
   m_TagString: Untagged
@@ -753,27 +754,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &5043626013703929037
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8767696995815583462}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &8931687742930075572
 GameObject:
   m_ObjectHideFlags: 0

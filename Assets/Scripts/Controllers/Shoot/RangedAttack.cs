@@ -21,7 +21,10 @@ namespace Controllers.Shoot
         {
             // Everyone runs
             foreach (var p in _spawnedProjectiles)
+            {
+                if (p == null) continue;
                 p.ProjectileTransform.position += p.Direction * (projectileSpeed * Time.deltaTime);
+            }
 
             if (!IsOwner) return;
 
@@ -31,11 +34,12 @@ namespace Controllers.Shoot
                 Shoot();
         }
 
+        // ReSharper disable Unity.PerformanceAnalysis
         private void Shoot()
         {
-            Vector3 startPosition = transform.position + transform.forward * 0.5f + transform.up;
+            Vector3 startPosition = transform.position + transform.forward * 1.5f;
             Vector3 direction = transform.forward;
-            
+
             SpawnProjectileLocal(startPosition, direction);
             SpawnProjectileServer(startPosition, direction, TimeManager.Tick);
         }
@@ -58,11 +62,23 @@ namespace Controllers.Shoot
         {
             float timeDiff = (float)(TimeManager.Tick - startTick) / TimeManager.TickRate;
             Vector3 spawnPosition = startPosition + direction * (projectileSpeed * timeDiff);
-            
+
             GameObject projectile = Instantiate(projectilePrefab, spawnPosition, Quaternion.identity);
-            
+            var projectileClass = projectile.GetComponent<Projectile>();
+            projectileClass.Init(this, gameObject);
+
             _spawnedProjectiles.Add(new ProjectileClass()
                 { ProjectileTransform = projectile.transform, Direction = direction });
+        }
+
+        /////////////////////////////
+        public void OnProjectileDisappear(Transform projectile)
+        {
+            for (int i = 0; i < _spawnedProjectiles.Count; i++)
+            {
+                if (_spawnedProjectiles[i].ProjectileTransform == projectile.transform)
+                    _spawnedProjectiles.RemoveAt(i);
+            }
         }
     }
 }
