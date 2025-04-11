@@ -1,47 +1,37 @@
-﻿using System;
-using FishNet.Object;
-using Unity.VisualScripting;
+﻿using FishNet.Object;
 using UnityEngine;
 
 namespace Controllers.Shoot
 {
     public class Projectile : NetworkBehaviour
     {
-        [Header("Config")] [SerializeField] private int damage = -1; // Damage dealt to the target on impact
-        [SerializeField] private float lifeTime = 3f; // Time after which the projectile is destroyed
+        private Vector3 _direction;
+        private float _speed;
 
-        [Header("Debug")] private Rigidbody _rb; // Rigidbody reference for physics-based movement
-        private RangedAttack _rangedAttack;
-        private GameObject _owner;
-
-        private void Awake()
+        public void Init(Vector3 direction, float speed)
         {
-            _rb = GetComponent<Rigidbody>(); // Cache Rigidbody component on Awake
+            _direction = direction;
+            _speed = speed;
         }
 
-        public void Init(RangedAttack rangedAttack, GameObject owner)
+        private void Update()
         {
-            _rangedAttack = rangedAttack;
-            _owner = owner;
-            Destroy(gameObject, lifeTime); // Ensure the projectile is destroyed after a set time (server-side only)
+            if (!IsServer) return;
+
+            transform.position += _direction * (_speed * Time.deltaTime);
         }
-        
+
         private void OnTriggerEnter(Collider other)
         {
-            if (other.transform.parent == transform.parent) return;
+            if (!IsServer) return;
 
+            // Hasar ver vs.
             if (other.transform.parent.TryGetComponent(out HealthController healthController))
             {
-                Debug.LogWarning("Projectile Hit: " + other.transform.parent.position);
-                healthController.RequestHealthChangeServer(damage); // Apply damage if the target implements HealthController
-                _rangedAttack.OnProjectileDisappear(transform);
-                ServerManager.Despawn(gameObject); // Despawn the projectile to remove it from the network
+                Debug.Log("Projectile hit: " + other.name);
+                healthController.TakeDamage(-1);
+                Despawn(); // FishNet tarafından, objeyi networkten kaldırır
             }
-        }
-
-        private void OnDestroy()
-        {
-            _rangedAttack.OnProjectileDisappear(transform);
         }
     }
 }

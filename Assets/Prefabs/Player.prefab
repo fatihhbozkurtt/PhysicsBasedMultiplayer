@@ -399,7 +399,7 @@ MonoBehaviour:
   _componentIndexCache: 255
   _addedNetworkObject: {fileID: 2175405360521128319}
   _networkObjectCache: {fileID: 0}
-  projectilePrefab: {fileID: 8274060870399717121, guid: 9aaafe7f9fe9b7a458c05efa59546089, type: 3}
+  projectilePrefab: {fileID: 7149303187327184753, guid: 9aaafe7f9fe9b7a458c05efa59546089, type: 3}
   projectileSpeed: 3
   fireCooldown: 0.125
 --- !u!114 &6635222932532132624

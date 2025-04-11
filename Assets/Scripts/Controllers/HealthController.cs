@@ -37,12 +37,23 @@ namespace Controllers
                 RequestHealthChangeServer(-1);
         }
 
+        // public void TakeDamage(int amount)
+        // {
+        //     // The method is being run on the server. 'this' refers to the correct HealthController
+        //     currentHealth += amount;
+        //     currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
+        // }
+        
         public void TakeDamage(int amount)
         {
-            // The method is being run on the server. 'this' refers to the correct HealthController
+            if (!IsServer) return;
+
             currentHealth += amount;
             currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
+
+            UpdateHealthObserver(currentHealth);
         }
+
 
         [ServerRpc]
         public void RequestHealthChangeServer(int amountToChange)
